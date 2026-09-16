@@ -33,6 +33,11 @@ def load_engine(name: str, **kwargs: object) -> InferenceEngine:
         from .ollama import OllamaEngine
 
         return OllamaEngine(**kwargs)  # type: ignore[arg-type]
+    if name == "gateway":
+        from .gateway import GatewayEngine
+
+        return GatewayEngine(**kwargs)  # type: ignore[arg-type]
     raise InferenceError(
-        f"unknown engine {name!r}; expected 'geniex', 'ollama' or 'simulated'"
+        f"unknown engine {name!r}; expected 'geniex', 'ollama', "
+        f"'gateway' or 'simulated'"
     )

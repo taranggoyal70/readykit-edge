@@ -160,7 +160,7 @@ screen before putting their hand in a cabinet.
 Being straight about this is part of the point.
 
 **Real and working:**
-- The whole decision-making pipeline, with 267 automated tests
+- The whole decision-making pipeline, with 593 automated tests
 - The comparison against the original design, on real model output
 - Expiry date checking, quantity checking, the tamper-evident record
 - The screen, the simulator, the lock controller's logic

@@ -10,17 +10,17 @@ That is deliberate. The way a good hackathon project loses is not to a better
 idea — it is to running out of clock with a half-built thing and nothing to
 show. Build them in order. Do not start stage 4 until stage 3 demos cleanly.
 
-| Stage | You can demo | Stop here and you have |
-|---|---|---|
-| 0 | Simulation, no hardware | A working system and the comparison table |
-| 1 | Real NPU reading a real kit | On-device AI, with latency numbers |
-| 2 | The latch physically moves | Model-to-device, the track's actual brief |
-| 3 | **It shuts while your hand is inside** | The moment people remember |
-| 4 | Hands-free voice | The bonus track |
-| 5 | Wall display | Polish |
+| Stage | You can demo | Stop here and you have | Status |
+|---|---|---|---|
+| 0 | Simulation, no hardware | A working system and the comparison table | Built |
+| 1 | Real NPU reading a real kit | On-device AI, with latency numbers | Built, unproven on the NPU |
+| 2 | The latch physically moves | Model-to-device, the track's actual brief | Built, unproven on the board |
+| 3 | **It shuts while your hand is inside** | The moment people remember | Built |
+| 4 | Hands-free voice | The bonus track | Not built |
+| 5 | Wall display | Polish | Built, less the transcript |
 
 Line 1 clones the existing repo, which already has the verdict logic, audit
-chain, firmware and 267 tests. Delete it only if you want to rebuild the safety
+chain, firmware and 593 tests. Delete it only if you want to rebuild the safety
 argument instead of the interesting part.
 
 ---
@@ -87,6 +87,9 @@ able to actuate.
 
 ## Stage 0 — Prove the machine, in simulation
 
+> **Built.** The commands below run today. Treat this stage as the check that
+> the machine in front of you is sound, not as something to write.
+
 No camera, no board, no model.
 
 ```powershell
@@ -106,6 +109,16 @@ it needs no hardware at all.
 ---
 
 ## Stage 1 — Real inference on the NPU
+
+> **Built, but never run against real silicon.** `FfmpegCameraSource` in
+> `capture.py` is the ffmpeg path below, and `inference/geniex.py` is the API
+> below — including the `GenieXLLM` refusal, the low temperature, and
+> `--require-npu`, which declines to run unless the device string can be shown
+> to be the NPU. What is unproven is every line of it against an actual
+> Hexagon NPU. The notes here are what to check when you have one.
+>
+> The conversational model under **Two models, two jobs** is *not* built; it
+> belongs to Stage 4.
 
 ### Capture — do not reach for OpenCV
 
@@ -195,6 +208,11 @@ prove where it ran.
 
 ## Stage 2 — The latch physically moves
 
+> **Built, but never flashed.** The sketch, `protocol.py`, `bridge/serial_link.py`
+> and the watchdog all exist, and every bullet below is pinned by a test against
+> a simulated node. None of that is evidence about the real board. `verify_board.py`
+> covers the part of the checklist that is observable over the wire.
+
 Flash `firmware\mcu_actuator\mcu_actuator.ino` to the **STM32U585 core**. Work
 through the bring-up checklist in `docs/deployment.md`.
 
@@ -278,6 +296,11 @@ hands in the tray and is probably wearing gloves.
 ---
 
 ## Stage 5 — The wall display
+
+> **Built, less the transcript.** `readykit console` serves this on loopback,
+> with the per-item checklist, the live actuator telemetry below, and the latch
+> read from the node rather than frozen at the verdict. The live transcript is
+> the one item outstanding, because it depends on Stage 4.
 
 Glanceable from across a room. Dark, high contrast.
 

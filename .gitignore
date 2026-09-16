@@ -21,3 +21,12 @@ records/
 .DS_Store
 .vscode/
 .idea/
+
+# Vercel
+web/.vercel
+.vercel
+.env*
+
+.env*.local
+.env.local
+.vercel

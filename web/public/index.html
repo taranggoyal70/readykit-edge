@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ReadyKit Edge</title>
+<meta name="description" content="Air-gapped visual kit inspection with physical actuation. A camera decides whether an emergency kit is complete, undamaged and in date - and treats 'I could not tell' as a reason to stay locked." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🔒</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+
+<div class="disclosure" role="note">
+  <strong>This page is a simulation.</strong> It replays recorded output from the
+  project's own simulator. It is not connected to a camera, an NPU or a latch, and
+  it is <em>not</em> the operator console - that binds to loopback only and is
+  never exposed to a network.
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="pills">
+      <span class="pill pill-air">air-gapped · no network</span>
+      <span class="pill">Snapdragon X Elite → Arduino UNO Q</span>
+    </div>
+    <h1>ReadyKit&nbsp;Edge</h1>
+    <p class="lede">
+      A camera watches an equipment kit. A vision-language model running entirely
+      on-device decides whether the kit is complete, undamaged and in date. That
+      decision drives a physical latch.
+    </p>
+    <p class="thesis">Absence of evidence is not evidence of compliance.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://github.com/taranggoyal70/readykit-edge">View the source</a>
+      <a class="btn" href="#proof">See the proof</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <h2>A verdict has three values, not two</h2>
+  <p class="body">
+    <code>PASS</code> is never the fallthrough branch. An occluded lens, a crashed
+    NPU, a dropped serial link, a smudged expiry date and an unparseable model
+    reply all land on <code>INDETERMINATE</code> - and <code>INDETERMINATE</code>
+    never opens anything.
+  </p>
+  <div class="verdicts">
+    <div class="vcard v-pass">
+      <div class="vname">PASS</div>
+      <div class="vmeaning">Every critical item positively found, in date, above the confidence floor</div>
+      <div class="vlatch">Latch released</div>
+    </div>
+    <div class="vcard v-fail">
+      <div class="vname">FAIL</div>
+      <div class="vmeaning">A positive finding of non-compliance</div>
+      <div class="vlatch">Latch engaged</div>
+    </div>
+    <div class="vcard v-hold">
+      <div class="vname">INDETERMINATE</div>
+      <div class="vmeaning">Compliance could not be established</div>
+      <div class="vlatch">Latch engaged</div>
+    </div>
+  </div>
+</section>
+
+<section id="proof">
+  <h2>The obvious implementation is broken, and we measured it</h2>
+  <p class="body">
+    The reference design for this hardware decides with
+    <code>if "missing" in reply or "no" in reply</code>. We kept that logic
+    executable and replay it on every frame against the same verbatim model
+    output. Pick a scene and watch both decide.
+  </p>
+
+  <div class="scoreboard">
+    <div class="score">
+      <div class="score-n" id="score-total">-</div>
+      <div class="score-l">scenes replayed</div>
+    </div>
+    <div class="score score-bad">
+      <div class="score-n" id="score-bad">-</div>
+      <div class="score-l">would have released the latch on a bad kit</div>
+    </div>
+  </div>
+
+  <div class="console">
+    <div class="scenes" id="scenes" role="tablist" aria-label="Inspection scenes"></div>
+    <div class="readout" id="readout"></div>
+  </div>
+</section>
+
+<section id="camera">
+  <h2>Point a camera at a kit</h2>
+  <p class="body">
+    This runs the real pipeline: the same prompt, the same parser, and the same
+    <code>resolve_verdict</code> that decides on the Snapdragon host. Lay out
+    something that stands in for a trauma kit - scissors, a glove, a taped
+    packet with a date on it - and see what it makes of it.
+  </p>
+
+  <div class="warn" role="note">
+    <strong>Your frame leaves your device for this.</strong> There is no NPU
+    behind a web page, so the page sends the frame to a hosted vision model.
+    The product does not work this way: on the Snapdragon host the model runs
+    on the Hexagon NPU and nothing is sent anywhere. That difference is why
+    the engine is recorded as <code>gateway:…</code> on every verdict below,
+    and never as the NPU.
+  </div>
+
+  <div class="camrig">
+    <figure class="campane">
+      <figcaption>Live <span class="sub">not recorded</span></figcaption>
+      <div class="camframe">
+        <video id="cam-video" autoplay playsinline muted hidden></video>
+        <p class="camempty" id="cam-empty">The camera turns on when you press Inspect.</p>
+      </div>
+      <div class="camacts">
+        <button class="btn btn-primary" id="cam-inspect">Inspect</button>
+        <button class="btn" id="cam-stop">Camera off</button>
+      </div>
+      <p class="camstatus" id="cam-status"></p>
+    </figure>
+
+    <figure class="campane">
+      <figcaption>The frame it judged</figcaption>
+      <div class="camframe">
+        <img id="cam-shot" alt="The frame the verdict was decided on" hidden>
+        <p class="camempty" id="cam-shot-empty">Nothing judged yet.</p>
+      </div>
+    </figure>
+  </div>
+
+  <div class="readout" id="cam-readout" hidden></div>
+</section>
+
+<section>
+  <h2>Why it needs a vision model</h2>
+  <p class="body">
+    Presence is not serviceability. A sealed, undamaged, correctly-placed packet of
+    <strong>expired</strong> haemostatic gauze passes every visual check and is
+    still not something to hand a medic. Reading a printed use-by date off crumpled
+    foil and reasoning about whether it has passed is work object detection cannot
+    do and a barcode scanner cannot do.
+  </p>
+  <p class="pull">
+    A kit can be complete, undamaged, every tick green - and still fail.
+    Try the <button class="inline-link" data-scene="expired">expired</button> scene.
+  </p>
+</section>
+
+<section>
+  <h2>Voice cannot open the latch</h2>
+  <p class="body">
+    The operator has both hands in a tray and is probably wearing gloves, so voice
+    is the right interface. It is also the one with the shortest path to a
+    catastrophic mistake. No member of the <code>Intent</code> enum releases the
+    latch, so there is no value the resolver can return that a caller could turn
+    into a <code>RELEASE</code>. Override attempts are recognised specifically, so
+    that asking is refused <em>and recorded</em>.
+  </p>
+  <div class="voice" id="voice"></div>
+</section>
+
+<section>
+  <h2>Honest limits</h2>
+  <ul class="limits">
+    <li><strong>It has not yet run on the real hardware.</strong> The Snapdragon host and the UNO Q are provided at the event. Every item on the bring-up checklist is a behaviour a test already pins against a simulated implementation, but simulation is not silicon.</li>
+    <li><strong>Counting is the model's weakest axis.</strong> Quantity is enforced and a count that was never taken fails closed, but counting small identical objects is harder for a VLM than identifying them.</li>
+    <li><strong>Tamper-evident, not tamper-proof.</strong> The audit chain catches editing, deletion and reordering. It does not stop someone with write access who rebuilds every subsequent hash.</li>
+    <li><strong>Single-station.</strong> No fleet management, no multi-site aggregation.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <p>
+    Every verdict on this page was produced by the project's own
+    <code>InspectionEngine</code> through the same <code>resolve_verdict</code> the
+    hardware uses. Nothing here is hand-written.
+  </p>
+  <p class="muted">
+    MIT licensed ·
+    <a href="https://github.com/taranggoyal70/readykit-edge">github.com/taranggoyal70/readykit-edge</a>
+  </p>
+</footer>
+
+<script src="./app.js"></script>
+</body>
+</html>

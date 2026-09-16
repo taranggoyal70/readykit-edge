@@ -1,0 +1,1617 @@
+{
+  "manifest": {
+    "id": "trauma-kit-a",
+    "name": "Field Trauma Kit A",
+    "confidence_floor": 0.6,
+    "hold_seconds": 5.0,
+    "expiry_warning_days": 30,
+    "items": [
+      {
+        "key": "tourniquet",
+        "label": "Windlass Tourniquet",
+        "severity": "critical",
+        "quantity": 2,
+        "expiry_checked": false
+      },
+      {
+        "key": "chest_seal",
+        "label": "Vented Chest Seal",
+        "severity": "critical",
+        "quantity": 2,
+        "expiry_checked": true
+      },
+      {
+        "key": "shears",
+        "label": "Trauma Shears",
+        "severity": "critical",
+        "quantity": 1,
+        "expiry_checked": false
+      },
+      {
+        "key": "gauze",
+        "label": "Hemostatic Gauze",
+        "severity": "critical",
+        "quantity": 1,
+        "expiry_checked": true
+      },
+      {
+        "key": "npa",
+        "label": "Nasopharyngeal Airway",
+        "severity": "critical",
+        "quantity": 1,
+        "expiry_checked": false
+      },
+      {
+        "key": "gloves",
+        "label": "Nitrile Gloves",
+        "severity": "advisory",
+        "quantity": 2,
+        "expiry_checked": false
+      },
+      {
+        "key": "marker",
+        "label": "Triage Marker",
+        "severity": "advisory",
+        "quantity": 1,
+        "expiry_checked": false
+      }
+    ]
+  },
+  "scenes": [
+    {
+      "scene": "complete",
+      "verdict": "pass",
+      "reason": "All 5 critical items present and serviceable",
+      "latch": "released",
+      "raw_reply": "All required items are present and appear serviceable.\n\n```json\n{\n  \"kit_present\": \"yes\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"found\",\n      \"confidence\": 0.97,\n      \"count\": 2\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"found\",\n      \"confidence\": 0.963,\n      \"count\": 2,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"found\",\n      \"confidence\": 0.935\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"found\",\n      \"confidence\": 0.937,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"found\",\n      \"confidence\": 0.95\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"found\",\n      \"confidence\": 0.921,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"found\",\n      \"confidence\": 0.928\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "found",
+          "confidence": 0.97,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "found",
+          "confidence": 0.96,
+          "count": 2,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "found",
+          "confidence": 0.95,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "found",
+          "confidence": 0.92,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [],
+        "damaged": [],
+        "unresolved": [],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": []
+      },
+      "blueprint": {
+        "signal": "PASS_KIT",
+        "divergence": "agreed",
+        "would_release": true,
+        "dangerous": false,
+        "reason": "Both would have released the latch"
+      }
+    },
+    {
+      "scene": "complete-negated",
+      "verdict": "pass",
+      "reason": "All 5 critical items present and serviceable",
+      "latch": "released",
+      "raw_reply": "No items are missing from this kit; everything is present.\n\n```json\n{\n  \"kit_present\": \"yes\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"found\",\n      \"confidence\": 0.97,\n      \"count\": 2\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"found\",\n      \"confidence\": 0.963,\n      \"count\": 2,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"found\",\n      \"confidence\": 0.935\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"found\",\n      \"confidence\": 0.937,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"found\",\n      \"confidence\": 0.95\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"found\",\n      \"confidence\": 0.921,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"found\",\n      \"confidence\": 0.928\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "found",
+          "confidence": 0.97,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "found",
+          "confidence": 0.96,
+          "count": 2,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "found",
+          "confidence": 0.95,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "found",
+          "confidence": 0.92,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [],
+        "damaged": [],
+        "unresolved": [],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": []
+      },
+      "blueprint": {
+        "signal": "ERR_MISSING_TOOL",
+        "divergence": "spurious",
+        "would_release": false,
+        "dangerous": false,
+        "reason": "The word \"missing\" appears in a reply that reports nothing missing - the blueprint cannot tell a denial from an assertion"
+      }
+    },
+    {
+      "scene": "occluded",
+      "verdict": "indeterminate",
+      "reason": "Could not establish compliance for: Windlass Tourniquet, Vented Chest Seal, Trauma Shears, Hemostatic Gauze, Nasopharyngeal Airway",
+      "latch": "engaged",
+      "raw_reply": "The tray is obscured; I am unable to assess its contents.\n\n```json\n{\n  \"kit_present\": \"unclear\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"unreadable\",\n      \"confidence\": 0.91,\n      \"count\": 2\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"unreadable\",\n      \"confidence\": 0.903,\n      \"count\": 2,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"unreadable\",\n      \"confidence\": 0.875\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"unreadable\",\n      \"confidence\": 0.877,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"unreadable\",\n      \"confidence\": 0.89\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"unreadable\",\n      \"confidence\": 0.861,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"unreadable\",\n      \"confidence\": 0.868\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "unreadable",
+          "confidence": 0.0,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "unreadable",
+          "confidence": 0.0,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "unreadable",
+          "confidence": 0.0,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "unreadable",
+          "confidence": 0.0,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "unreadable",
+          "confidence": 0.0,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "unreadable",
+          "confidence": 0.0,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "unreadable",
+          "confidence": 0.0,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [],
+        "damaged": [],
+        "unresolved": [
+          "tourniquet",
+          "chest_seal",
+          "shears",
+          "gauze",
+          "npa"
+        ],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": [
+          "gloves",
+          "marker"
+        ]
+      },
+      "blueprint": {
+        "signal": "PASS_KIT",
+        "divergence": "unsafe",
+        "would_release": true,
+        "dangerous": true,
+        "reason": "The model declined to establish compliance, but said so in words containing neither \"missing\" nor \"no\" - so the blueprint reads its refusal as a pass and releases the latch"
+      }
+    },
+    {
+      "scene": "empty",
+      "verdict": "fail",
+      "reason": "Kit non-compliant: missing Windlass Tourniquet, Vented Chest Seal, Trauma Shears, Hemostatic Gauze, Nasopharyngeal Airway",
+      "latch": "engaged",
+      "raw_reply": "The tray is empty. Every required item is missing.\n\n```json\n{\n  \"kit_present\": \"yes\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"absent\",\n      \"confidence\": 0.96,\n      \"count\": 2\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"absent\",\n      \"confidence\": 0.953,\n      \"count\": 2,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"absent\",\n      \"confidence\": 0.925\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"absent\",\n      \"confidence\": 0.927,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"absent\",\n      \"confidence\": 0.94\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"absent\",\n      \"confidence\": 0.911,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"absent\",\n      \"confidence\": 0.918\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "absent",
+          "confidence": 0.96,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "absent",
+          "confidence": 0.95,
+          "count": 2,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "absent",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "absent",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "absent",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "absent",
+          "confidence": 0.91,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "absent",
+          "confidence": 0.92,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [
+          "tourniquet",
+          "chest_seal",
+          "shears",
+          "gauze",
+          "npa"
+        ],
+        "damaged": [],
+        "unresolved": [],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": [
+          "gloves",
+          "marker"
+        ]
+      },
+      "blueprint": {
+        "signal": "ERR_MISSING_TOOL",
+        "divergence": "agreed",
+        "would_release": false,
+        "dangerous": false,
+        "reason": "Both would have kept the latch engaged"
+      }
+    },
+    {
+      "scene": "low-confidence",
+      "verdict": "indeterminate",
+      "reason": "Could not establish compliance for: Windlass Tourniquet, Vented Chest Seal, Trauma Shears, Hemostatic Gauze, Nasopharyngeal Airway",
+      "latch": "engaged",
+      "raw_reply": "The image is dim and my assessment is tentative.\n\n```json\n{\n  \"kit_present\": \"yes\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"found\",\n      \"confidence\": 0.48,\n      \"count\": 2\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"found\",\n      \"confidence\": 0.473,\n      \"count\": 2,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"found\",\n      \"confidence\": 0.445\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"found\",\n      \"confidence\": 0.447,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"found\",\n      \"confidence\": 0.46\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"found\",\n      \"confidence\": 0.431,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"found\",\n      \"confidence\": 0.438\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "found",
+          "confidence": 0.48,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "found",
+          "confidence": 0.47,
+          "count": 2,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "found",
+          "confidence": 0.45,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "found",
+          "confidence": 0.45,
+          "count": null,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "found",
+          "confidence": 0.46,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "found",
+          "confidence": 0.43,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "found",
+          "confidence": 0.44,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [],
+        "damaged": [],
+        "unresolved": [
+          "tourniquet",
+          "chest_seal",
+          "shears",
+          "gauze",
+          "npa"
+        ],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": [
+          "gloves",
+          "marker"
+        ]
+      },
+      "blueprint": {
+        "signal": "PASS_KIT",
+        "divergence": "unsafe",
+        "would_release": true,
+        "dangerous": true,
+        "reason": "The model declined to establish compliance, but said so in words containing neither \"missing\" nor \"no\" - so the blueprint reads its refusal as a pass and releases the latch"
+      }
+    },
+    {
+      "scene": "garbled",
+      "verdict": "indeterminate",
+      "reason": "Inference failed: model reply was unusable: no JSON object found in reply: 'The kit appears to be in good order, I think.'",
+      "latch": "engaged",
+      "raw_reply": "The kit appears to be in good order, I think.",
+      "sightings": [],
+      "flags": {
+        "missing": [],
+        "damaged": [],
+        "unresolved": [
+          "tourniquet",
+          "chest_seal",
+          "shears",
+          "gauze",
+          "npa",
+          "gloves",
+          "marker"
+        ],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": []
+      },
+      "blueprint": {
+        "signal": "PASS_KIT",
+        "divergence": "unsafe",
+        "would_release": true,
+        "dangerous": true,
+        "reason": "The model declined to establish compliance, but said so in words containing neither \"missing\" nor \"no\" - so the blueprint reads its refusal as a pass and releases the latch"
+      }
+    },
+    {
+      "scene": "engine-fault",
+      "verdict": "indeterminate",
+      "reason": "Inference failed: simulated NPU fault: Hexagon context lost",
+      "latch": "engaged",
+      "raw_reply": "",
+      "sightings": [],
+      "flags": {
+        "missing": [],
+        "damaged": [],
+        "unresolved": [
+          "tourniquet",
+          "chest_seal",
+          "shears",
+          "gauze",
+          "npa",
+          "gloves",
+          "marker"
+        ],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": []
+      },
+      "blueprint": null
+    },
+    {
+      "scene": "expired",
+      "verdict": "fail",
+      "reason": "Kit non-compliant: expired Vented Chest Seal",
+      "latch": "engaged",
+      "raw_reply": "All required items are present. The Vented Chest Seal carries a printed use-by date that has passed.\n\n```json\n{\n  \"kit_present\": \"yes\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"found\",\n      \"confidence\": 0.97,\n      \"count\": 2\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"found\",\n      \"confidence\": 0.963,\n      \"count\": 2,\n      \"expiry\": \"2026-08-02\"\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"found\",\n      \"confidence\": 0.935\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"found\",\n      \"confidence\": 0.937,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"found\",\n      \"confidence\": 0.95\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"found\",\n      \"confidence\": 0.921,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"found\",\n      \"confidence\": 0.928\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "found",
+          "confidence": 0.97,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "found",
+          "confidence": 0.96,
+          "count": 2,
+          "expiry": "2026-08-02"
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "found",
+          "confidence": 0.95,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "found",
+          "confidence": 0.92,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [],
+        "damaged": [],
+        "unresolved": [],
+        "expired": [
+          "chest_seal"
+        ],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": []
+      },
+      "blueprint": {
+        "signal": "PASS_KIT",
+        "divergence": "unsafe",
+        "would_release": true,
+        "dangerous": true,
+        "reason": "The model reported a non-compliant kit in words containing neither trigger substring, so the blueprint releases the latch on it"
+      }
+    },
+    {
+      "scene": "expiring-soon",
+      "verdict": "pass",
+      "reason": "All 5 critical items present and serviceable; 1 expiring soon",
+      "latch": "released",
+      "raw_reply": "All required items are present and in date.\n\n```json\n{\n  \"kit_present\": \"yes\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"found\",\n      \"confidence\": 0.97,\n      \"count\": 2\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"found\",\n      \"confidence\": 0.963,\n      \"count\": 2,\n      \"expiry\": \"2026-09-28\"\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"found\",\n      \"confidence\": 0.935\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"found\",\n      \"confidence\": 0.937,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"found\",\n      \"confidence\": 0.95\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"found\",\n      \"confidence\": 0.921,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"found\",\n      \"confidence\": 0.928\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "found",
+          "confidence": 0.97,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "found",
+          "confidence": 0.96,
+          "count": 2,
+          "expiry": "2026-09-28"
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "found",
+          "confidence": 0.95,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "found",
+          "confidence": 0.92,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [],
+        "damaged": [],
+        "unresolved": [],
+        "expired": [],
+        "expiring_soon": [
+          "chest_seal"
+        ],
+        "short": [],
+        "advisories": []
+      },
+      "blueprint": {
+        "signal": "PASS_KIT",
+        "divergence": "agreed",
+        "would_release": true,
+        "dangerous": false,
+        "reason": "Both would have released the latch"
+      }
+    },
+    {
+      "scene": "expiry-unreadable",
+      "verdict": "indeterminate",
+      "reason": "Could not establish compliance for: Vented Chest Seal",
+      "latch": "engaged",
+      "raw_reply": "All required items are present. The date printed on the Vented Chest Seal is smudged and I am unable to transcribe it.\n\n```json\n{\n  \"kit_present\": \"yes\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"found\",\n      \"confidence\": 0.97,\n      \"count\": 2\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"found\",\n      \"confidence\": 0.963,\n      \"count\": 2\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"found\",\n      \"confidence\": 0.935\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"found\",\n      \"confidence\": 0.937,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"found\",\n      \"confidence\": 0.95\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"found\",\n      \"confidence\": 0.921,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"found\",\n      \"confidence\": 0.928\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "found",
+          "confidence": 0.97,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "found",
+          "confidence": 0.96,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "found",
+          "confidence": 0.95,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "found",
+          "confidence": 0.92,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [],
+        "damaged": [],
+        "unresolved": [
+          "chest_seal"
+        ],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": []
+      },
+      "blueprint": {
+        "signal": "PASS_KIT",
+        "divergence": "unsafe",
+        "would_release": true,
+        "dangerous": true,
+        "reason": "The model declined to establish compliance, but said so in words containing neither \"missing\" nor \"no\" - so the blueprint reads its refusal as a pass and releases the latch"
+      }
+    },
+    {
+      "scene": "short",
+      "verdict": "fail",
+      "reason": "Kit non-compliant: short on Windlass Tourniquet",
+      "latch": "engaged",
+      "raw_reply": "All required items are present. I count only one Windlass Tourniquet where the specification calls for 2.\n\n```json\n{\n  \"kit_present\": \"yes\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"found\",\n      \"confidence\": 0.97,\n      \"count\": 1\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"found\",\n      \"confidence\": 0.963,\n      \"count\": 2,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"found\",\n      \"confidence\": 0.935\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"found\",\n      \"confidence\": 0.937,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"found\",\n      \"confidence\": 0.95\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"found\",\n      \"confidence\": 0.921,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"found\",\n      \"confidence\": 0.928\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "found",
+          "confidence": 0.97,
+          "count": 1,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "found",
+          "confidence": 0.96,
+          "count": 2,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "found",
+          "confidence": 0.95,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "found",
+          "confidence": 0.92,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [],
+        "damaged": [],
+        "unresolved": [],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [
+          "tourniquet"
+        ],
+        "advisories": []
+      },
+      "blueprint": {
+        "signal": "PASS_KIT",
+        "divergence": "unsafe",
+        "would_release": true,
+        "dangerous": true,
+        "reason": "The model reported a non-compliant kit in words containing neither trigger substring, so the blueprint releases the latch on it"
+      }
+    },
+    {
+      "scene": "count-unreadable",
+      "verdict": "indeterminate",
+      "reason": "Could not establish compliance for: Windlass Tourniquet",
+      "latch": "engaged",
+      "raw_reply": "All required items are present. The Windlass Tourniquet are stacked and I cannot tell how many there are.\n\n```json\n{\n  \"kit_present\": \"yes\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"found\",\n      \"confidence\": 0.97\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"found\",\n      \"confidence\": 0.963,\n      \"count\": 2,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"found\",\n      \"confidence\": 0.935\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"found\",\n      \"confidence\": 0.937,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"found\",\n      \"confidence\": 0.95\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"found\",\n      \"confidence\": 0.921,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"found\",\n      \"confidence\": 0.928\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "found",
+          "confidence": 0.97,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "found",
+          "confidence": 0.96,
+          "count": 2,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "found",
+          "confidence": 0.95,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "found",
+          "confidence": 0.92,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [],
+        "damaged": [],
+        "unresolved": [
+          "tourniquet"
+        ],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": []
+      },
+      "blueprint": {
+        "signal": "ERR_MISSING_TOOL",
+        "divergence": "agreed",
+        "would_release": false,
+        "dangerous": false,
+        "reason": "Both would have kept the latch engaged"
+      }
+    },
+    {
+      "scene": "missing-tourniquet",
+      "verdict": "fail",
+      "reason": "Kit non-compliant: missing Windlass Tourniquet",
+      "latch": "engaged",
+      "raw_reply": "Absent from the tray: Windlass Tourniquet. All other required items are present.\n\n```json\n{\n  \"kit_present\": \"yes\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"absent\",\n      \"confidence\": 0.96,\n      \"count\": 2\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"found\",\n      \"confidence\": 0.953,\n      \"count\": 2,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"found\",\n      \"confidence\": 0.925\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"found\",\n      \"confidence\": 0.927,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"found\",\n      \"confidence\": 0.94\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"found\",\n      \"confidence\": 0.911,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"found\",\n      \"confidence\": 0.918\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "absent",
+          "confidence": 0.96,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "found",
+          "confidence": 0.95,
+          "count": 2,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "found",
+          "confidence": 0.91,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "found",
+          "confidence": 0.92,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [
+          "tourniquet"
+        ],
+        "damaged": [],
+        "unresolved": [],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": []
+      },
+      "blueprint": {
+        "signal": "PASS_KIT",
+        "divergence": "unsafe",
+        "would_release": true,
+        "dangerous": true,
+        "reason": "The model reported a non-compliant kit in words containing neither trigger substring, so the blueprint releases the latch on it"
+      }
+    },
+    {
+      "scene": "missing-chest_seal",
+      "verdict": "fail",
+      "reason": "Kit non-compliant: missing Vented Chest Seal",
+      "latch": "engaged",
+      "raw_reply": "Absent from the tray: Vented Chest Seal. All other required items are present.\n\n```json\n{\n  \"kit_present\": \"yes\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"found\",\n      \"confidence\": 0.96,\n      \"count\": 2\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"absent\",\n      \"confidence\": 0.953,\n      \"count\": 2,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"found\",\n      \"confidence\": 0.925\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"found\",\n      \"confidence\": 0.927,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"found\",\n      \"confidence\": 0.94\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"found\",\n      \"confidence\": 0.911,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"found\",\n      \"confidence\": 0.918\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "found",
+          "confidence": 0.96,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "absent",
+          "confidence": 0.95,
+          "count": 2,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "found",
+          "confidence": 0.91,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "found",
+          "confidence": 0.92,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [
+          "chest_seal"
+        ],
+        "damaged": [],
+        "unresolved": [],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": []
+      },
+      "blueprint": {
+        "signal": "PASS_KIT",
+        "divergence": "unsafe",
+        "would_release": true,
+        "dangerous": true,
+        "reason": "The model reported a non-compliant kit in words containing neither trigger substring, so the blueprint releases the latch on it"
+      }
+    },
+    {
+      "scene": "missing-shears",
+      "verdict": "fail",
+      "reason": "Kit non-compliant: missing Trauma Shears",
+      "latch": "engaged",
+      "raw_reply": "Absent from the tray: Trauma Shears. All other required items are present.\n\n```json\n{\n  \"kit_present\": \"yes\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"found\",\n      \"confidence\": 0.96,\n      \"count\": 2\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"found\",\n      \"confidence\": 0.953,\n      \"count\": 2,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"absent\",\n      \"confidence\": 0.925\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"found\",\n      \"confidence\": 0.927,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"found\",\n      \"confidence\": 0.94\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"found\",\n      \"confidence\": 0.911,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"found\",\n      \"confidence\": 0.918\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "found",
+          "confidence": 0.96,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "found",
+          "confidence": 0.95,
+          "count": 2,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "absent",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "found",
+          "confidence": 0.91,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "found",
+          "confidence": 0.92,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [
+          "shears"
+        ],
+        "damaged": [],
+        "unresolved": [],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": []
+      },
+      "blueprint": {
+        "signal": "PASS_KIT",
+        "divergence": "unsafe",
+        "would_release": true,
+        "dangerous": true,
+        "reason": "The model reported a non-compliant kit in words containing neither trigger substring, so the blueprint releases the latch on it"
+      }
+    },
+    {
+      "scene": "missing-gauze",
+      "verdict": "fail",
+      "reason": "Kit non-compliant: missing Hemostatic Gauze",
+      "latch": "engaged",
+      "raw_reply": "Absent from the tray: Hemostatic Gauze. All other required items are present.\n\n```json\n{\n  \"kit_present\": \"yes\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"found\",\n      \"confidence\": 0.96,\n      \"count\": 2\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"found\",\n      \"confidence\": 0.953,\n      \"count\": 2,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"found\",\n      \"confidence\": 0.925\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"absent\",\n      \"confidence\": 0.927,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"found\",\n      \"confidence\": 0.94\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"found\",\n      \"confidence\": 0.911,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"found\",\n      \"confidence\": 0.918\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "found",
+          "confidence": 0.96,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "found",
+          "confidence": 0.95,
+          "count": 2,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "absent",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "found",
+          "confidence": 0.91,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "found",
+          "confidence": 0.92,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [
+          "gauze"
+        ],
+        "damaged": [],
+        "unresolved": [],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": []
+      },
+      "blueprint": {
+        "signal": "PASS_KIT",
+        "divergence": "unsafe",
+        "would_release": true,
+        "dangerous": true,
+        "reason": "The model reported a non-compliant kit in words containing neither trigger substring, so the blueprint releases the latch on it"
+      }
+    },
+    {
+      "scene": "missing-npa",
+      "verdict": "fail",
+      "reason": "Kit non-compliant: missing Nasopharyngeal Airway",
+      "latch": "engaged",
+      "raw_reply": "Absent from the tray: Nasopharyngeal Airway. All other required items are present.\n\n```json\n{\n  \"kit_present\": \"yes\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"found\",\n      \"confidence\": 0.96,\n      \"count\": 2\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"found\",\n      \"confidence\": 0.953,\n      \"count\": 2,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"found\",\n      \"confidence\": 0.925\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"found\",\n      \"confidence\": 0.927,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"absent\",\n      \"confidence\": 0.94\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"found\",\n      \"confidence\": 0.911,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"found\",\n      \"confidence\": 0.918\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "found",
+          "confidence": 0.96,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "found",
+          "confidence": 0.95,
+          "count": 2,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "absent",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "found",
+          "confidence": 0.91,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "found",
+          "confidence": 0.92,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [
+          "npa"
+        ],
+        "damaged": [],
+        "unresolved": [],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": []
+      },
+      "blueprint": {
+        "signal": "PASS_KIT",
+        "divergence": "unsafe",
+        "would_release": true,
+        "dangerous": true,
+        "reason": "The model reported a non-compliant kit in words containing neither trigger substring, so the blueprint releases the latch on it"
+      }
+    },
+    {
+      "scene": "missing-gloves",
+      "verdict": "pass",
+      "reason": "All 5 critical items present and serviceable; advisory: Nitrile Gloves",
+      "latch": "released",
+      "raw_reply": "Absent from the tray: Nitrile Gloves. All other required items are present.\n\n```json\n{\n  \"kit_present\": \"yes\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"found\",\n      \"confidence\": 0.96,\n      \"count\": 2\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"found\",\n      \"confidence\": 0.953,\n      \"count\": 2,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"found\",\n      \"confidence\": 0.925\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"found\",\n      \"confidence\": 0.927,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"found\",\n      \"confidence\": 0.94\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"absent\",\n      \"confidence\": 0.911,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"found\",\n      \"confidence\": 0.918\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "found",
+          "confidence": 0.96,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "found",
+          "confidence": 0.95,
+          "count": 2,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "absent",
+          "confidence": 0.91,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "found",
+          "confidence": 0.92,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [],
+        "damaged": [],
+        "unresolved": [],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": [
+          "gloves"
+        ]
+      },
+      "blueprint": {
+        "signal": "PASS_KIT",
+        "divergence": "agreed",
+        "would_release": true,
+        "dangerous": false,
+        "reason": "Both would have released the latch"
+      }
+    },
+    {
+      "scene": "missing-marker",
+      "verdict": "pass",
+      "reason": "All 5 critical items present and serviceable; advisory: Triage Marker",
+      "latch": "released",
+      "raw_reply": "Absent from the tray: Triage Marker. All other required items are present.\n\n```json\n{\n  \"kit_present\": \"yes\",\n  \"items\": [\n    {\n      \"key\": \"tourniquet\",\n      \"presence\": \"found\",\n      \"confidence\": 0.96,\n      \"count\": 2\n    },\n    {\n      \"key\": \"chest_seal\",\n      \"presence\": \"found\",\n      \"confidence\": 0.953,\n      \"count\": 2,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"shears\",\n      \"presence\": \"found\",\n      \"confidence\": 0.925\n    },\n    {\n      \"key\": \"gauze\",\n      \"presence\": \"found\",\n      \"confidence\": 0.927,\n      \"expiry\": \"2027-10-21\"\n    },\n    {\n      \"key\": \"npa\",\n      \"presence\": \"found\",\n      \"confidence\": 0.94\n    },\n    {\n      \"key\": \"gloves\",\n      \"presence\": \"found\",\n      \"confidence\": 0.911,\n      \"count\": 2\n    },\n    {\n      \"key\": \"marker\",\n      \"presence\": \"absent\",\n      \"confidence\": 0.918\n    }\n  ]\n}\n```",
+      "sightings": [
+        {
+          "key": "tourniquet",
+          "label": "Windlass Tourniquet",
+          "presence": "found",
+          "confidence": 0.96,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "chest_seal",
+          "label": "Vented Chest Seal",
+          "presence": "found",
+          "confidence": 0.95,
+          "count": 2,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "shears",
+          "label": "Trauma Shears",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gauze",
+          "label": "Hemostatic Gauze",
+          "presence": "found",
+          "confidence": 0.93,
+          "count": null,
+          "expiry": "2027-10-21"
+        },
+        {
+          "key": "npa",
+          "label": "Nasopharyngeal Airway",
+          "presence": "found",
+          "confidence": 0.94,
+          "count": null,
+          "expiry": null
+        },
+        {
+          "key": "gloves",
+          "label": "Nitrile Gloves",
+          "presence": "found",
+          "confidence": 0.91,
+          "count": 2,
+          "expiry": null
+        },
+        {
+          "key": "marker",
+          "label": "Triage Marker",
+          "presence": "absent",
+          "confidence": 0.92,
+          "count": null,
+          "expiry": null
+        }
+      ],
+      "flags": {
+        "missing": [],
+        "damaged": [],
+        "unresolved": [],
+        "expired": [],
+        "expiring_soon": [],
+        "short": [],
+        "advisories": [
+          "marker"
+        ]
+      },
+      "blueprint": {
+        "signal": "PASS_KIT",
+        "divergence": "agreed",
+        "would_release": true,
+        "dangerous": false,
+        "reason": "Both would have released the latch"
+      }
+    }
+  ],
+  "summary": {
+    "total": 19,
+    "would_release_a_bad_kit": 11
+  },
+  "voice": [
+    {
+      "said": "start watching",
+      "intent": "start_watch",
+      "reason": "matched a known phrase",
+      "actionable": true,
+      "refused": false
+    },
+    {
+      "said": "what's wrong",
+      "intent": "status",
+      "reason": "matched a known phrase",
+      "actionable": true,
+      "refused": false
+    },
+    {
+      "said": "why did it fail",
+      "intent": "explain",
+      "reason": "matched a known phrase",
+      "actionable": true,
+      "refused": false
+    },
+    {
+      "said": "read the last five inspections",
+      "intent": "read_records",
+      "reason": "matched a known phrase",
+      "actionable": true,
+      "refused": false
+    },
+    {
+      "said": "switch to the electrical toolbox kit",
+      "intent": "select_manifest",
+      "reason": "matched a known phrase",
+      "actionable": true,
+      "refused": false
+    },
+    {
+      "said": "just unlock it",
+      "intent": "override",
+      "reason": "the latch is not voice-operable; refused and recorded",
+      "actionable": false,
+      "refused": true
+    },
+    {
+      "said": "override the check, I'm in a hurry",
+      "intent": "override",
+      "reason": "the latch is not voice-operable; refused and recorded",
+      "actionable": false,
+      "refused": true
+    },
+    {
+      "said": "open the cabinet for me",
+      "intent": "override",
+      "reason": "the latch is not voice-operable; refused and recorded",
+      "actionable": false,
+      "refused": true
+    },
+    {
+      "said": "what's the weather",
+      "intent": "unresolved",
+      "reason": "not a phrase this understands",
+      "actionable": false,
+      "refused": false
+    }
+  ]
+}
