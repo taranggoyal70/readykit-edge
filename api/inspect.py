@@ -135,6 +135,20 @@ def serialise(outcome: Any, manifest: Manifest, engine_name: str) -> dict[str, A
     }
 
 
+def configured() -> bool:
+    """Whether a credential exists for the hosted model.
+
+    Separated from inference failure on purpose. "Nobody has wired this up
+    yet" and "the model looked and could not tell" are different facts, and
+    only the second one is about the kit. Collapsing them would let a
+    deployment problem masquerade as a cautious verdict, which is the same
+    confusion INDETERMINATE exists to prevent.
+    """
+    from readykit.inference.gateway import _credential
+
+    return _credential() is not None
+
+
 def run(image: bytes) -> dict[str, Any]:
     """One inspection. Every failure of this machinery is INDETERMINATE."""
     manifest = Manifest.from_json(MANIFEST_PATH.read_text())
@@ -172,6 +186,24 @@ class handler(BaseHTTPRequestHandler):
         image = self.rfile.read(length)
         if not image.startswith(IMAGE_SIGNATURES):
             self._send(415, {"error": "send a JPEG or PNG image"})
+            return
+
+        if not configured():
+            # A deployment problem, not a verdict. Say so in the page's own
+            # words rather than handing a visitor an environment variable
+            # name, and do not dress it up as INDETERMINATE.
+            self._send(
+                503,
+                {
+                    "error": (
+                        "Live inference is not configured on this deployment "
+                        "yet, so the camera has nothing to decide with. The "
+                        "recorded scenes below are unaffected - they are real "
+                        "verdicts from the same pipeline."
+                    ),
+                    "unconfigured": True,
+                },
+            )
             return
 
         now = time.monotonic()

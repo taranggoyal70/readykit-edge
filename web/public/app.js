@@ -241,6 +241,15 @@ async function inspectFromCamera() {
     const payload = await response.json();
 
     if (!response.ok) {
+      // An unconfigured deployment is not a shy verdict. Say which it is, and
+      // point at the part of the page that still works.
+      if (payload.unconfigured) {
+        $("cam-readout").innerHTML =
+          `<div class="live-note">${esc(payload.error)}</div>`;
+        $("cam-readout").hidden = false;
+        setStatus("Live inference unavailable.", false);
+        return;
+      }
       setStatus(payload.error || `the server answered ${response.status}`, false);
       return;
     }
