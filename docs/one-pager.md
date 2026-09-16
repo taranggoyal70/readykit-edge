@@ -56,7 +56,7 @@ readykit compare --manifest manifests/trauma-kit-a.json
   19 scenarios · 11 would have released the latch under the original design
 ```
 
-It gets two right, including one purely by accident. That's pinned by a test,
+It gets six right, including one purely by accident. That's pinned by a test,
 because a comparison that only ever flattered us wouldn't be worth showing.
 
 ## Why it needs a vision model
@@ -81,7 +81,7 @@ A kit can be complete, undamaged, every tick green — and still fail.
 | **Audit** | Hash-chained records. Editing, deleting or reordering history is detectable and named. |
 | **Simulation** | Every hardware layer has a real and a simulated implementation, so the whole pipeline — including latch behaviour and the watchdog — is testable without a board. |
 
-**256 tests. `ruff` and `mypy --strict` clean. CI on Python 3.11–3.13.**
+**593 tests. `ruff` and `mypy --strict` clean. CI on Python 3.11–3.13.**
 
 ## Honest limits
 

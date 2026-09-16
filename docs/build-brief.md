@@ -20,7 +20,7 @@ show. Build them in order. Do not start stage 4 until stage 3 demos cleanly.
 | 5 | Wall display | Polish |
 
 Line 1 clones the existing repo, which already has the verdict logic, audit
-chain, firmware and 267 tests. Delete it only if you want to rebuild the safety
+chain, firmware and 593 tests. Delete it only if you want to rebuild the safety
 argument instead of the interesting part.
 
 ---
