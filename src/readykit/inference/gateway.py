@@ -49,12 +49,36 @@ it never saw."""
 
 DEFAULT_HOST = "https://ai-gateway.vercel.sh/v1"
 
+HOST_ENV = "READYKIT_INFERENCE_HOST"
+MODEL_ENV = "READYKIT_INFERENCE_MODEL"
+"""Overrides, so a deployment can point this at any OpenAI-compatible endpoint
+without a code change.
+
+This matters more than it looks. Vercel's AI Gateway will not service a
+request without a card on file, which makes it a poor default for anyone
+standing this up to try it. Several providers expose the same chat-completions
+shape on a free tier with no card at all - Google's
+`generativelanguage.googleapis.com/v1beta/openai`, Groq's
+`api.groq.com/openai/v1` - and a local Ollama speaks it too, on loopback,
+which is the only one of them that keeps the air gap.
+
+The request shape is the same in every case, so the choice is configuration
+rather than another engine. `name` still records where the frame went.
+"""
+
 OIDC_ENV = "VERCEL_OIDC_TOKEN"
 """Injected into every Vercel deployment. Preferred, because it means no API
 key has to exist, be pasted anywhere, or be rotated."""
 
 API_KEY_ENV = "AI_GATEWAY_API_KEY"
 """The fallback, for running this outside a Vercel deployment."""
+
+
+def _host_label(host: str) -> str:
+    """The endpoint's hostname, for the record. Never the path or a query."""
+    from urllib.parse import urlparse
+
+    return urlparse(host).hostname or host
 
 
 def _credential() -> str | None:
@@ -68,15 +92,15 @@ class GatewayEngine(InferenceEngine):
 
     def __init__(
         self,
-        model: str = DEFAULT_MODEL,
-        host: str = DEFAULT_HOST,
+        model: str | None = None,
+        host: str | None = None,
         timeout: float = 90.0,
         temperature: float = 0.1,
         token: str | None = None,
         opener: Any | None = None,
     ) -> None:
-        self.model_id = model
-        self.host = host.rstrip("/")
+        self.model_id = model or os.environ.get(MODEL_ENV) or DEFAULT_MODEL
+        self.host = (host or os.environ.get(HOST_ENV) or DEFAULT_HOST).rstrip("/")
         self._timeout = timeout
         self._temperature = temperature
         self._opener = opener or urllib.request.urlopen
@@ -91,7 +115,11 @@ class GatewayEngine(InferenceEngine):
                 f"{OIDC_ENV} automatically; elsewhere, set {API_KEY_ENV}."
             )
 
-        self.name = f"gateway:{model}"
+        # Records the host as well as the model when it is not the default.
+        # "which model" is only half the question an auditor asks about a
+        # frame that left the device; "sent where" is the other half.
+        where = "" if self.host == DEFAULT_HOST else f"@{_host_label(self.host)}"
+        self.name = f"gateway:{self.model_id}{where}"
 
     def infer(self, frame: Frame, manifest: Manifest) -> Observation:
         body = json.dumps(

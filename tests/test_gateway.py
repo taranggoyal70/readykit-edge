@@ -258,3 +258,45 @@ def test_the_loader_resolves_the_gateway(monkeypatch: pytest.MonkeyPatch) -> Non
 def test_the_loader_names_the_gateway_among_the_options() -> None:
     with pytest.raises(InferenceError, match="gateway"):
         load_engine("nonsense")
+
+
+# -- pointing it somewhere without a card ------------------------------------
+
+
+def test_the_endpoint_is_configurable_from_the_environment(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """AI Gateway will not serve a request without a card on file, so the
+    default has to be overridable or nobody can try this."""
+    monkeypatch.setenv("READYKIT_INFERENCE_HOST", "https://api.groq.com/openai/v1")
+    monkeypatch.setenv("READYKIT_INFERENCE_MODEL", "some/vision-model")
+    engine = GatewayEngine(token="t")
+    assert engine.host == "https://api.groq.com/openai/v1"
+    assert engine.model_id == "some/vision-model"
+
+
+def test_a_non_default_host_is_named_in_the_record(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """'Which model' is half of what an auditor asks about a frame that left
+    the device. 'Sent where' is the other half."""
+    monkeypatch.setenv("READYKIT_INFERENCE_HOST", "https://api.groq.com/openai/v1")
+    assert GatewayEngine(token="t").name.endswith("@api.groq.com")
+
+
+def test_the_default_host_is_not_spelled_out_in_the_record() -> None:
+    assert "@" not in GatewayEngine(token="t").name
+
+
+def test_an_explicit_argument_beats_the_environment(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("READYKIT_INFERENCE_MODEL", "from/env")
+    assert GatewayEngine(token="t", model="explicit/model").model_id == "explicit/model"
+
+
+def test_a_local_endpoint_is_still_reported_as_leaving_the_device() -> None:
+    """Honest even when it is not: this engine posts over HTTP to something
+    it does not control. The air-gapped path is `ollama`, which says so."""
+    engine = GatewayEngine(token="t", host="http://127.0.0.1:11434/v1")
+    assert engine.air_gapped is False
