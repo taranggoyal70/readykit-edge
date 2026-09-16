@@ -1,0 +1,375 @@
+/*
+ * ReadyKit Edge showcase.
+ *
+ * Visual language: DESIGN.md at the repo root - Linear's system, vendored from
+ * VoltAgent/awesome-design-md, plus the ReadyKit verdict semantics. Token names
+ * map one-to-one onto that document, and the verdict colours are used for
+ * verdicts and nothing else.
+ */
+
+:root {
+  --canvas: #010102;
+  --surface-1: #0f1011;
+  --surface-2: #141516;
+  --surface-3: #18191a;
+
+  --hairline: #23252a;
+  --hairline-strong: #34343a;
+
+  --ink: #f7f8f8;
+  --ink-muted: #d0d6e0;
+  --ink-subtle: #8a8f98;
+  --ink-tertiary: #62666d;
+
+  --primary: #5e6ad2;
+  --primary-hover: #828fff;
+
+  --verdict-pass: #27a644;
+  --verdict-fail: #e5484d;
+  --verdict-hold: #e2a336;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+code, .mono { font-family: var(--mono); font-size: 0.9em; }
+
+code {
+  background: var(--surface-2);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 0.1em 0.4em;
+  color: var(--ink-muted);
+  /* A long inline snippet must wrap inside the gutter rather than push the
+   * page wider than the phone - a horizontal scrollbar on a narrow screen
+   * reads as a broken page. */
+  overflow-wrap: anywhere;
+}
+
+/* -- the disclosure, which must never be subtle ------------------------- */
+
+.disclosure {
+  background: rgba(226, 163, 54, 0.12);
+  border-bottom: 1px solid rgba(226, 163, 54, 0.3);
+  color: var(--ink-muted);
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 12px 24px;
+  text-align: center;
+}
+.disclosure strong { color: var(--verdict-hold); }
+
+/* -- hero ---------------------------------------------------------------- */
+
+.hero { padding: 88px 0 64px; border-bottom: 1px solid var(--hairline); }
+
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+
+.pill {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ink-subtle);
+  background: var(--surface-2);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 5px 12px;
+}
+.pill-air { color: var(--verdict-pass); border-color: rgba(39, 166, 68, 0.3); background: rgba(39, 166, 68, 0.1); }
+
+h1 {
+  font-size: clamp(44px, 7vw, 76px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  margin: 0 0 24px;
+}
+
+.lede {
+  font-size: clamp(17px, 2.2vw, 21px);
+  color: var(--ink-muted);
+  max-width: 62ch;
+  margin: 0 0 28px;
+}
+
+.thesis {
+  font-size: clamp(18px, 2.4vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  border-left: 2px solid var(--primary);
+  padding-left: 18px;
+  margin: 0 0 36px;
+}
+
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.btn {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-md);
+  padding: 10px 18px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.btn:hover { background: var(--surface-3); border-color: var(--ink-tertiary); }
+.btn-primary { background: var(--primary); border-color: var(--primary); }
+.btn-primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+
+/* -- sections ------------------------------------------------------------ */
+
+section { padding: 64px 0; border-bottom: 1px solid var(--hairline); }
+
+h2 {
+  font-size: clamp(24px, 3.4vw, 34px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 18px;
+}
+
+.body { color: var(--ink-muted); max-width: 68ch; margin: 0 0 28px; }
+
+.pull {
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 500;
+  border-left: 2px solid var(--verdict-hold);
+  padding-left: 18px;
+  max-width: 62ch;
+}
+
+.inline-link {
+  font: inherit;
+  color: var(--primary-hover);
+  background: none;
+  border: none;
+  border-bottom: 1px solid currentColor;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* -- verdict cards ------------------------------------------------------- */
+
+.verdicts { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+
+.vcard {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-left-width: 3px;
+  border-radius: var(--radius-lg);
+  padding: 22px;
+}
+.vname { font-family: var(--mono); font-size: 14px; font-weight: 500; letter-spacing: 0.06em; margin-bottom: 10px; }
+.vmeaning { color: var(--ink-muted); font-size: 14px; margin-bottom: 14px; }
+.vlatch { font-size: 13px; color: var(--ink-subtle); border-top: 1px solid var(--hairline); padding-top: 12px; }
+
+.v-pass { border-left-color: var(--verdict-pass); background: rgba(39, 166, 68, 0.06); }
+.v-pass .vname { color: var(--verdict-pass); }
+.v-fail { border-left-color: var(--verdict-fail); background: rgba(229, 72, 77, 0.06); }
+.v-fail .vname { color: var(--verdict-fail); }
+.v-hold { border-left-color: var(--verdict-hold); background: rgba(226, 163, 54, 0.06); }
+.v-hold .vname { color: var(--verdict-hold); }
+
+/* -- scoreboard ---------------------------------------------------------- */
+
+.scoreboard { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-bottom: 32px; }
+
+.score {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+.score-n { font-family: var(--mono); font-size: 48px; font-weight: 500; line-height: 1; letter-spacing: -0.02em; }
+.score-l { color: var(--ink-subtle); font-size: 14px; margin-top: 10px; }
+.score-bad { background: rgba(229, 72, 77, 0.07); border-color: rgba(229, 72, 77, 0.3); }
+.score-bad .score-n { color: var(--verdict-fail); }
+
+/* -- the replay console -------------------------------------------------- */
+
+.console {
+  display: grid;
+  gap: 0;
+  grid-template-columns: 240px 1fr;
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.scenes {
+  border-right: 1px solid var(--hairline);
+  padding: 10px;
+  max-height: 560px;
+  overflow-y: auto;
+}
+
+.scene-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--ink-subtle);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.scene-btn:hover { background: var(--surface-3); color: var(--ink-muted); }
+.scene-btn[aria-selected="true"] { background: var(--surface-3); color: var(--ink); font-weight: 500; }
+.scene-btn .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+
+.readout { padding: 24px; min-height: 420px; }
+
+.banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline);
+  border-left-width: 3px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+}
+.banner-verdict { font-family: var(--mono); font-size: 22px; font-weight: 500; letter-spacing: 0.04em; }
+.banner-latch { font-size: 13px; color: var(--ink-subtle); font-family: var(--mono); }
+.banner-reason { flex-basis: 100%; color: var(--ink-muted); font-size: 14px; }
+
+.b-pass { border-left-color: var(--verdict-pass); background: rgba(39, 166, 68, 0.1); }
+.b-pass .banner-verdict { color: var(--verdict-pass); }
+.b-fail { border-left-color: var(--verdict-fail); background: rgba(229, 72, 77, 0.1); }
+.b-fail .banner-verdict { color: var(--verdict-fail); }
+.b-hold { border-left-color: var(--verdict-hold); background: rgba(226, 163, 54, 0.1); }
+.b-hold .banner-verdict { color: var(--verdict-hold); }
+
+.checklist { border: 1px solid var(--hairline); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 18px; }
+
+.row {
+  display: grid;
+  grid-template-columns: 22px 1fr auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 14px;
+}
+.row:last-child { border-bottom: none; }
+.row .glyph { font-family: var(--mono); font-weight: 500; text-align: center; }
+.row .label { color: var(--ink-muted); }
+.row .note { font-family: var(--mono); font-size: 12px; color: var(--ink-subtle); }
+.row .conf { font-family: var(--mono); font-size: 12px; color: var(--ink-tertiary); font-variant-numeric: tabular-nums; }
+
+.row-ok .glyph { color: var(--verdict-pass); }
+.row-bad { background: rgba(229, 72, 77, 0.08); }
+.row-bad .glyph, .row-bad .note { color: var(--verdict-fail); }
+.row-bad .label { color: var(--ink); }
+.row-hold { background: rgba(226, 163, 54, 0.08); }
+.row-hold .glyph, .row-hold .note { color: var(--verdict-hold); }
+.row-advisory .glyph { color: var(--ink-subtle); }
+
+.said {
+  background: var(--surface-2);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 18px;
+}
+.said-h { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-tertiary); margin-bottom: 8px; display: flex; justify-content: space-between; gap: 12px; }
+.said-h .hint { text-transform: none; letter-spacing: 0; color: var(--ink-tertiary); opacity: 0.7; }
+/* Capped and scrollable. The verbatim reply matters - it is what the blueprint
+ * parser actually read - but a full JSON body pushes the blueprint verdict,
+ * which is the point of the whole panel, below the fold. */
+.said-q {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-muted);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 132px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--hairline-strong) transparent;
+}
+.said-q::-webkit-scrollbar { width: 8px; }
+.said-q::-webkit-scrollbar-thumb { background: var(--hairline-strong); border-radius: 4px; }
+
+.blueprint { border-radius: var(--radius-md); border: 1px solid var(--hairline); padding: 14px 16px; font-size: 14px; }
+.blueprint-h { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-tertiary); margin-bottom: 8px; }
+.bp-bad { background: rgba(229, 72, 77, 0.1); border-color: rgba(229, 72, 77, 0.35); }
+.bp-bad .verdictword { color: var(--verdict-fail); font-weight: 600; }
+.bp-ok { background: var(--surface-2); }
+.bp-ok .verdictword { color: var(--ink-muted); }
+.blueprint .sig { font-family: var(--mono); font-size: 12px; color: var(--ink-subtle); display: block; margin-top: 6px; }
+
+/* -- voice --------------------------------------------------------------- */
+
+.voice { border: 1px solid var(--hairline); border-radius: var(--radius-lg); overflow: hidden; }
+
+.vrow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--hairline);
+}
+.vrow:last-child { border-bottom: none; }
+.vrow .said-text { font-family: var(--mono); font-size: 13.5px; color: var(--ink-muted); }
+.vrow .said-text::before { content: "“"; color: var(--ink-tertiary); }
+.vrow .said-text::after { content: "”"; color: var(--ink-tertiary); }
+.vrow .outcome { font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; text-align: right; }
+.vrow .why { grid-column: 1 / -1; font-size: 12.5px; color: var(--ink-tertiary); margin-top: -4px; }
+
+.v-refused { background: rgba(229, 72, 77, 0.09); }
+.v-refused .outcome { color: var(--verdict-fail); font-weight: 600; }
+.v-none .outcome { color: var(--ink-tertiary); }
+.v-ok .outcome { color: var(--verdict-pass); }
+
+/* -- limits and footer --------------------------------------------------- */
+
+.limits { list-style: none; padding: 0; margin: 0; max-width: 74ch; }
+.limits li { color: var(--ink-subtle); font-size: 15px; padding: 14px 0 14px 20px; border-bottom: 1px solid var(--hairline); position: relative; }
+.limits li:last-child { border-bottom: none; }
+.limits li::before { content: "·"; position: absolute; left: 4px; color: var(--ink-tertiary); }
+.limits strong { color: var(--ink-muted); font-weight: 500; }
+
+footer { padding: 48px 24px 72px; color: var(--ink-subtle); font-size: 14px; }
+footer p { max-width: 70ch; margin: 0 0 10px; }
+footer a { color: var(--primary-hover); }
+.muted { color: var(--ink-tertiary); }
+
+@media (max-width: 800px) {
+  .console { grid-template-columns: 1fr; }
+  .scenes { border-right: none; border-bottom: 1px solid var(--hairline); max-height: 190px; }
+  .hero { padding: 56px 0 44px; }
+  section { padding: 48px 0; }
+}
