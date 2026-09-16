@@ -1,6 +1,13 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "outputDirectory": "public",
+  "framework": null,
+  "buildCommand": "python3 web/build_data.py",
+  "outputDirectory": "web/public",
+  "functions": {
+    "api/inspect.py": {
+      "maxDuration": 120
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",

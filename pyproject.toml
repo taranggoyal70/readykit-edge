@@ -39,7 +39,7 @@ select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
 python_version = "3.12"
 strict = true
 mypy_path = "src"
-files = ["src", "tests"]
+files = ["src", "tests", "api", "web"]
 
 # Optional hardware dependencies with no published stubs. `geniex` ships with
 # the Qualcomm AI Engine Direct SDK and exists only on the Snapdragon host, so

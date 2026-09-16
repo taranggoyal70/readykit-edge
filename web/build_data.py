@@ -105,7 +105,12 @@ def main() -> None:
     )
 
     scenes = [inspect(manifest, name) for name in scene_names(manifest)]
-    dangerous = sum(1 for s in scenes if (s["blueprint"] or {}).get("dangerous"))
+
+    dangerous = 0
+    for scene in scenes:
+        blueprint = scene["blueprint"]
+        if isinstance(blueprint, dict) and blueprint.get("dangerous"):
+            dangerous += 1
 
     payload = {
         "manifest": {

@@ -95,6 +95,50 @@
   </div>
 </section>
 
+<section id="camera">
+  <h2>Point a camera at a kit</h2>
+  <p class="body">
+    This runs the real pipeline: the same prompt, the same parser, and the same
+    <code>resolve_verdict</code> that decides on the Snapdragon host. Lay out
+    something that stands in for a trauma kit - scissors, a glove, a taped
+    packet with a date on it - and see what it makes of it.
+  </p>
+
+  <div class="warn" role="note">
+    <strong>Your frame leaves your device for this.</strong> There is no NPU
+    behind a web page, so the page sends the frame to a hosted vision model.
+    The product does not work this way: on the Snapdragon host the model runs
+    on the Hexagon NPU and nothing is sent anywhere. That difference is why
+    the engine is recorded as <code>gateway:…</code> on every verdict below,
+    and never as the NPU.
+  </div>
+
+  <div class="camrig">
+    <figure class="campane">
+      <figcaption>Live <span class="sub">not recorded</span></figcaption>
+      <div class="camframe">
+        <video id="cam-video" autoplay playsinline muted hidden></video>
+        <p class="camempty" id="cam-empty">The camera turns on when you press Inspect.</p>
+      </div>
+      <div class="camacts">
+        <button class="btn btn-primary" id="cam-inspect">Inspect</button>
+        <button class="btn" id="cam-stop">Camera off</button>
+      </div>
+      <p class="camstatus" id="cam-status"></p>
+    </figure>
+
+    <figure class="campane">
+      <figcaption>The frame it judged</figcaption>
+      <div class="camframe">
+        <img id="cam-shot" alt="The frame the verdict was decided on" hidden>
+        <p class="camempty" id="cam-shot-empty">Nothing judged yet.</p>
+      </div>
+    </figure>
+  </div>
+
+  <div class="readout" id="cam-readout" hidden></div>
+</section>
+
 <section>
   <h2>Why it needs a vision model</h2>
   <p class="body">

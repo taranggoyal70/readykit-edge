@@ -51,6 +51,16 @@ class InferenceEngine(ABC):
 
     name: str = "unknown"
 
+    air_gapped: bool = True
+    """Whether the frame stays on this device.
+
+    True for every engine that ships on the Snapdragon host. False means
+    pixels are leaving for a third party, and whatever is displaying the
+    verdict is expected to say so. This is a field rather than a note in a
+    README because a claim that the device is offline should be answerable by
+    the code that would be breaking it.
+    """
+
     @abstractmethod
     def infer(self, frame: Frame, manifest: Manifest) -> Observation:
         """Observe the frame. Raise InferenceError if observation failed.

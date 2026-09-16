@@ -24,3 +24,9 @@ records/
 
 # Vercel
 web/.vercel
+.vercel
+.env*
+
+.env*.local
+.env.local
+.vercel

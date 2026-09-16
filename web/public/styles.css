@@ -373,3 +373,64 @@ footer a { color: var(--primary-hover); }
   .hero { padding: 56px 0 44px; }
   section { padding: 48px 0; }
 }
+
+/* -- camera -------------------------------------------------------------- */
+
+/* The warning is styled like the verdict-hold tint on purpose. It is the same
+ * class of statement the amber light makes: something about this is not the
+ * clean case, and you should read it before acting. */
+.warn {
+  background: rgba(226, 163, 54, 0.1);
+  border: 1px solid rgba(226, 163, 54, 0.32);
+  border-left-width: 3px;
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: var(--ink-muted);
+  max-width: 78ch;
+}
+.warn strong { color: var(--verdict-hold); }
+
+.camrig { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 18px; }
+
+.campane { margin: 0; background: var(--surface-1); border: 1px solid var(--hairline); border-radius: var(--radius-lg); padding: 14px; }
+.campane figcaption { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-tertiary); margin-bottom: 10px; }
+.campane .sub { color: var(--ink-tertiary); opacity: 0.7; }
+
+.camframe {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.camframe video, .camframe img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.camempty { color: var(--ink-tertiary); font-size: 13px; text-align: center; padding: 0 18px; margin: 0; }
+
+.camacts { display: flex; gap: 10px; margin-top: 12px; }
+.camacts .btn { font-size: 13px; padding: 8px 14px; }
+.camacts .btn:disabled { opacity: 0.5; cursor: default; }
+
+.camstatus { font-family: var(--mono); font-size: 12.5px; color: var(--ink-subtle); margin: 10px 0 0; min-height: 1.2em; }
+.camstatus[data-busy="1"] { color: var(--verdict-hold); }
+
+#cam-readout {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  min-height: 0;
+}
+
+.live-note {
+  font-size: 13px;
+  color: var(--ink-subtle);
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}

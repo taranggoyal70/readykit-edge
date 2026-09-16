@@ -58,6 +58,13 @@ function select(index) {
     b.setAttribute("aria-selected", String(Number(b.dataset.i) === index));
   });
 
+  renderReadout(scene, "readout");
+}
+
+/* One renderer for both. A live verdict must not be displayed by more
+ * forgiving code than a replayed one - if the live path had its own renderer,
+ * the two could drift and the page would be showing two different products. */
+function renderReadout(scene, target) {
   const cls = CLASS_FOR[scene.verdict] || "hold";
   const items = DATA.manifest.items;
 
@@ -103,7 +110,15 @@ function select(index) {
          <span class="sig">wrote: ${esc(bp.signal)}</span>
        </div>`;
 
-  document.getElementById("readout").innerHTML = `
+  const liveNote = scene.live
+    ? `<div class="live-note">Decided by <code>${esc(scene.engine || "a hosted model")}</code>
+        over the network, then judged by the same <code>resolve_verdict</code> the
+        hardware runs. The latch state below is what the firmware would have been
+        commanded to do - there is no board at the other end of a web page.</div>`
+    : "";
+
+  document.getElementById(target).innerHTML = `
+    ${liveNote}
     <div class="banner b-${cls}">
       <span class="banner-verdict">${esc(scene.verdict.toUpperCase())}</span>
       <span class="banner-latch">latch ${esc(scene.latch)}</span>
@@ -137,6 +152,123 @@ function renderVoice() {
     .join("");
 }
 
+/* ------------------------------------------------------------------ camera */
+
+/* The browser opens the camera, not the server - so this page needs no camera
+ * permission of its own and the frame never touches disk. The frame does leave
+ * the device, to a hosted model, which is the one thing about this section
+ * that must never be soft-pedalled: the banner says so before you press it. */
+
+let stream = null;
+
+function $(id) {
+  return document.getElementById(id);
+}
+
+async function startCamera() {
+  if (stream) return;
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    throw new Error("this browser cannot open a camera from this page");
+  }
+  stream = await navigator.mediaDevices.getUserMedia({
+    video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: "environment" },
+    audio: false,
+  });
+  const video = $("cam-video");
+  video.srcObject = stream;
+  video.hidden = false;
+  $("cam-empty").hidden = true;
+  await video.play();
+}
+
+function stopCamera() {
+  if (stream) {
+    stream.getTracks().forEach((t) => t.stop());
+    stream = null;
+  }
+  const video = $("cam-video");
+  video.srcObject = null;
+  video.hidden = true;
+  $("cam-empty").hidden = false;
+}
+
+/* Longest side capped: a bigger upload is not a better look at a kit, and the
+ * model is billed per call. Matches MAX_CAMERA_SIDE on the host. */
+const MAX_SIDE = 960;
+
+function grabFrame() {
+  const video = $("cam-video");
+  if (!video.videoWidth) return null;
+  const scale = Math.min(1, MAX_SIDE / Math.max(video.videoWidth, video.videoHeight));
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.round(video.videoWidth * scale);
+  canvas.height = Math.round(video.videoHeight * scale);
+  canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+  return canvas;
+}
+
+function setStatus(text, busy) {
+  const el = $("cam-status");
+  el.textContent = text;
+  el.dataset.busy = busy ? "1" : "";
+}
+
+async function inspectFromCamera() {
+  const button = $("cam-inspect");
+  button.disabled = true;
+
+  try {
+    await startCamera();
+    setStatus("Hold the items still\u2026", true);
+    // One beat so autoexposure settles; a frame grabbed the instant the camera
+    // opens is usually a dark one, and a dark frame reads as INDETERMINATE.
+    await new Promise((r) => setTimeout(r, 700));
+
+    const canvas = grabFrame();
+    if (!canvas) throw new Error("the camera produced no frame");
+
+    $("cam-shot").src = canvas.toDataURL("image/jpeg", 0.85);
+    $("cam-shot").hidden = false;
+    $("cam-shot-empty").hidden = true;
+    setStatus("Looking\u2026 this takes a few seconds", true);
+
+    const blob = await new Promise((r) => canvas.toBlob(r, "image/jpeg", 0.85));
+    const response = await fetch("/api/inspect", {
+      method: "POST",
+      headers: { "Content-Type": "image/jpeg" },
+      body: blob,
+    });
+    const payload = await response.json();
+
+    if (!response.ok) {
+      setStatus(payload.error || `the server answered ${response.status}`, false);
+      return;
+    }
+
+    renderReadout(payload, "cam-readout");
+    $("cam-readout").hidden = false;
+    setStatus("", false);
+  } catch (error) {
+    const blocked = String(error.name || "").includes("NotAllowed");
+    setStatus(
+      blocked
+        ? "Camera access was blocked. Allow it for this page in the address bar."
+        : `Could not inspect: ${error.message}`,
+      false,
+    );
+  } finally {
+    button.disabled = false;
+  }
+}
+
+function wireCamera() {
+  $("cam-inspect").addEventListener("click", inspectFromCamera);
+  $("cam-stop").addEventListener("click", () => {
+    stopCamera();
+    setStatus("Camera off.", false);
+  });
+}
+
 async function boot() {
   const response = await fetch("./data/inspections.json");
   DATA = await response.json();
@@ -146,6 +278,7 @@ async function boot() {
 
   renderScenes();
   renderVoice();
+  wireCamera();
 
   // Open on `expired`: a kit where every item is present and every tick is
   // green, and which fails anyway. It is the scene that makes the argument.
